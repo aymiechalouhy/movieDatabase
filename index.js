@@ -19,6 +19,22 @@ res.send({status:200," " : hours + ":" + minutes + ":" + seconds });
 
 });
 
+app.get("/hello/:id", (req, res) => {
+  res.send({status:200, message:"Hello" + req.params.id});
+});
+
+app.get("/search", (req, res) => {
+  if(req.query['s']){
+  res.send({status:200, message:"ok", data:req.query['s']});
+  }
+  else
+  {
+    res.send({status:500, error:true, message:"you have to provide a search"});
+    res.status(500);
+    //res.sendStatus(500);
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
