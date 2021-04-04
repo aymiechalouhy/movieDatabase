@@ -75,6 +75,14 @@ app.get("/movies/get/:inputRequest", (req, res) => {
      }
 });
 
+app.get("/movies/get/:id", (req, res) => {
+  if(req.params.id){ 
+    res.send({status:200, data:movies});
+  }
+  else{
+    res.send({status:404, error:true, message:'the movie <ID> does not exist'});
+  }});
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
