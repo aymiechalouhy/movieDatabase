@@ -59,6 +59,22 @@ app.get("/movies/delete", (req, res) => {
   res.send({status:200, message:"ok"});
 });
 
+const sortedMovies = movies.sort((a, b) => b.date - a.date)
+
+app.get("/movies/get/:inputRequest", (req, res) => {
+  if(req.params.inputRequest === "by-date"){
+  res.send({status:200, data: sortedMovies(movies, 'year')});
+  }
+
+  if(req.params.inputRequest === "by-rating"){
+    res.send({status:200, data: sortedMovies(movies, 'rating')});
+    }
+
+  if(req.params.inputRequest === "by-title"){
+    res.send({status:200, data: sortedMovies(movies, 'title')});
+     }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
