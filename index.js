@@ -97,6 +97,15 @@ app.get("/movies/get/:id", (req, res) => {
     res.status(200).send(movies)
 });
 
+app.get('/movies/delete/:id', (req, res) => {
+  if (req.params.id < 1 || req.params.id > movies.length) {
+      res.status(404).send('The movie ' + req.params.id + ' does not exist')
+  }
+  else {
+      movies.splice(req.params.id - 1, 1)
+      res.send(movies)
+  }
+});
 
 
 app.listen(port, () => {
