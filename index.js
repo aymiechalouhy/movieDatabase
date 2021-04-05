@@ -84,6 +84,21 @@ app.get("/movies/get/:id", (req, res) => {
   }});
 
 
+  app.get('/movies/add', (req, res) => {
+    var t = req.query.title;
+    var y = req.query.year;
+    var r = req.query.rating;
+    if (t == "" || y == "" || y.toString().length != 4 || isNaN(y))
+     { res.status(403).send('You cannot create a movie without providing a title and a year') }
+    else {
+        if (r == "" || typeof r == undefined) { r = 4; }
+    }
+    movies.push({ title: t, year: parseInt(y), rating: parseInt(r) });
+    res.status(200).send(movies)
+});
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
